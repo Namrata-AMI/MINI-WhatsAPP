@@ -1,0 +1,48 @@
+body{
+    background-color:rgb(43, 41, 41);
+    margin-left:2rem;
+    color:white;
+
+}
+
+.chatbox{
+    background-color:grey;
+    padding: 20px;
+    border-radius: 2rem;
+    display: inline-block;
+    margin-left: 4rem;
+   
+
+}
+
+.msgbox{
+    background-color: dodgerblue;
+    color:white;
+    padding: 5px 15px;
+    border-radius: 2rem;
+}
+
+.chatbox img{
+    width:30px;
+    height:30px;
+    border-radius: 50%;
+}
+
+
+.type input{
+    margin-left: 20px;
+    font-size: 1rem;
+    font-family:cursive;
+    font-weight: 600;
+    width:90%;
+    height:3rem;
+    border-radius: 3rem;
+    display: inline-block;
+}
+
+
+
+
+
+
+

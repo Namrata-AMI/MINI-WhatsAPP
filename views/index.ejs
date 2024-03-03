@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Chats</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+<h1> <u><i>MINI - Whatsapp</i> </u></h1>
+<br>
+<br>
+
+<form method="get" action="chats/new">
+    <button>new chat</button>        <!-- can delete to use last code-->
+</form>
+<br>
+<br>
+
+
+<% for(let chat of chats){ %>
+    <div class="chatbox">
+        <p><img src ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa_RWJnwtSZ_EgkC9Cd9BF31eQN8Co4K2H5D6zzRXBRg&s"> from :<i><b><%= chat.from %></b></i></p>
+        <div class=" msgbox">
+            <p> <%= chat.msg %></p>
+            <form method="get" action="/chats/<%=chat._id%>/edit">
+                <button>edit</button>
+            </form>
+            <form method="post" onsubmit="return confirmDelete()" action="/chats/<%=chat._id%>/?_method=DELETE">
+                <button>delete</button>
+            </form>
+        </div>
+        <p><img src ="https://cdn-icons-png.freepik.com/512/2335/2335114.png"> recieved by :<i><b><%= chat.to %></b></i></p>
+        <hr>
+        <p> <%=chat.created_at.toString().split(" ")[4] %></p>
+        <p> <%=chat.created_at.toString().split(" ").slice(0,4).join("-")%></p>
+    </div>
+    <br>
+    <br>
+ 
+<% } %>
+
+<br>
+<br>
+<!--<form method="GET" action="/chats/new">
+    <div class="type">
+    <label id="type">Type here..</label>
+        <input type="text" placeholder="start chatting.." id="type" name="type">
+
+    </div>
+</form>
+<br>
+-->
+<script>
+    function confirmDelete(){
+        return confirm("Are you sure that you want to delete this chat?");
+    }
+</script>
+
+</body>
+</html>
