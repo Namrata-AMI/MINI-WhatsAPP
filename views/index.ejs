@@ -30,6 +30,9 @@
             <form method="post" onsubmit="return confirmDelete()" action="/chats/<%=chat._id%>/?_method=DELETE">
                 <button>delete</button>
             </form>
+            <form method="get" action="/chats/<%=chat._id%>">
+                <button>show</button>
+            </form>
         </div>
         <p><img src ="https://cdn-icons-png.freepik.com/512/2335/2335114.png"> recieved by :<i><b><%= chat.to %></b></i></p>
         <hr>
