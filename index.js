@@ -37,11 +37,15 @@ app.get("/chats/new",(req,res)=>{
         res.render("new.ejs");
 });
 
+
+/////////////////    Async Wrap function    /////////////////////
+
 function asyncWrap(fn){
     return function(req,res,next){
         fn(req,res,next).catch((err)=>next(err));
-    }
-}
+    };
+};
+
 
 //New - Show Route                      // error handling perform//
 app.get("/chats/:id",asyncWrap(async(req,res,next)=>{
@@ -56,7 +60,7 @@ app.get("/chats/:id",asyncWrap(async(req,res,next)=>{
 
 
 //create route
-app.post("/chats", asyncWrap(async(req,res,next)=>{
+app.post("/chats",async(req,res,next)=>{
   let {from,to, msg} = req.body;
   let newChat   = new chat({
     from: from,
@@ -64,19 +68,17 @@ app.post("/chats", asyncWrap(async(req,res,next)=>{
     to: to,
     created_at:Date() });
  await newChat.save()
-})
-);
+});
 
 //  edit route
-app.get("/chats/:id/edit", asyncWrap(async(req,res)=>{
+app.get("/chats/:id/edit",async(req,res)=>{
     let {id} = req.params;
     let Chat = await chat.findById(id);
     res.render("edit.ejs",{Chat});
-})
-);
+});
 
 // update route
-app.put("/chats/:id", asyncWrap(async(req,res)=>{
+app.put("/chats/:id",async(req,res)=>{
     let {id} = req.params; 
     let {msg: newMsg} = req.body;
     console.log(newMsg);
@@ -86,18 +88,16 @@ app.put("/chats/:id", asyncWrap(async(req,res)=>{
 
         console.log(updateChat);
         res.redirect("/chats")
-    })
-);
+    });
 
 // DELETE route
-app.delete("/chats/:id", asyncWrap(async (req,res)=>{
+app.delete("/chats/:id", async (req,res)=>{
     let {id} = req.params; 
     let deleteChat = await chat.findByIdAndDelete(id);
     console.log(deleteChat);
     res.redirect("/chats");
     console.log("deleted");
-})
-);
+});
 
 app.get("/",(req,res)=>{
 res.send("server working..");
@@ -112,3 +112,7 @@ app.use((err,req,res,next)=>{
     app.listen(8080,()=>{
     console.log("app is listening on port 8080");
 });
+
+
+
+
